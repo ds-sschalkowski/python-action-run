@@ -1,5 +1,6 @@
 import argparse
 import logging
+import requests
 from config_loader import ConfigData
 
 logger = logging.getLogger(__name__)
@@ -27,5 +28,9 @@ if __name__ == "__main__":
     config = ConfigData.load_json_config(args.config_path)
 
     logger.info(f"Greeting to {args.recipient}")
-    logger.info(f"Host is set to {config.host}")
+    logger.info(f"Performing get request to {config.host}")
+
+    response = requests.get(config.host)
+    status_code = response.status_code
+    logger.info(f"Status code of the response was {status_code}")
 
