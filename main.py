@@ -13,8 +13,8 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--recipient",
-        help="Who should be welcomed?",
+        "--user",
+        help="Which username should be checked?",
         default="User",
         type=str
     )
@@ -26,13 +26,15 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    config = ConfigData.load_json_config(args.config_path)
 
-    logger.info(f"Greeting to {args.recipient}")
-    logger.info(f"Performing get request to {config.host}")
+    userMatchesSecret: bool = args.user == 'Silvan'
+    logger.info(f"Given username matches secret: {(userMatchesSecret)}")
 
     secret = os.getenv('SECRET')
-    logger.info(f"Env variable SECRET has the value '{secret}'")
+    logger.info(f"Env variable SECRET in reversed is '{(secret[::-1])}'")
+
+    config = ConfigData.load_json_config(args.config_path)
+    logger.info(f"Performing get request to {config.host}")
 
     response = requests.get(config.host)
     status_code = response.status_code

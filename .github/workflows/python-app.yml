@@ -34,6 +34,6 @@ jobs:
 
     - name: Run Python script
       run: |
-        python main.py --recipient ${{ secrets.USER }} --config_path config.json
+        python main.py --user ${{ secrets.USER }} --config_path config.json
       env:
           SECRET: ${{ secrets.SECRET }}
