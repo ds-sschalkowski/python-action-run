@@ -1,4 +1,5 @@
 import argparse
+import os
 import logging
 import requests
 from config_loader import ConfigData
@@ -29,6 +30,9 @@ if __name__ == "__main__":
 
     logger.info(f"Greeting to {args.recipient}")
     logger.info(f"Performing get request to {config.host}")
+
+    secret = os.getenv('SECRET')
+    logger.info(f"Env variable SECRET has the value '{secret}'")
 
     response = requests.get(config.host)
     status_code = response.status_code

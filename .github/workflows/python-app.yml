@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      
+
   workflow_dispatch:
 
 jobs:
@@ -34,4 +34,6 @@ jobs:
 
     - name: Run Python script
       run: |
-        python main.py --recipient "${{ secrets.USER }}"
+        python main.py --recipient ${{ secrets.USER }} --config_path config.json
+      env:
+          SECRET: ${{ secrets.SECRET }}
